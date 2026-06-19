@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BeerRequest;
-use App\Services\PunkapiService;
-use Illuminate\Http\Request;
+use App\Jobs\ExportJob;
+use App\Jobs\SendExportEmailJob;
+use App\Jobs\StoreExportDataJob;
+use App\Models\Meal;
+use App\Services\PunkApiService;
 
 class BeerController extends Controller
 {
@@ -13,14 +16,17 @@ class BeerController extends Controller
         $filters = $request->validated();
         $beers = $service->getBeers(...$filters);
         $meals = Meal::all();
-        return Inertia::render('Beers', [
-            'beers' => $beers,
-            'meals' => $meals,
-            'filters' => $filters
-        ]);
+
+
+        dd($meals);
+        // return Inertia::render('Beers', [
+        //     'beers' => $beers,
+        //     'meals' => $meals,
+        //     'filters' => $filters
+        // ]);
     }
 
-    public function export(BeerRequest $request, PunkapiService $service)
+    public function export(BeerRequest $request, PunkApiService $service)
     {
         $filename = "cervejas-encontradas-" . now()->format('Y-m-d - H_i') . ".xlsx";
 

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
-class PunkapiService
+class PunkApiService
 {
     public function getBeers(
         ?string $beer_name = null,
