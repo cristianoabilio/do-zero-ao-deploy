@@ -20,7 +20,7 @@ class ExportEmail extends Mailable
      *
      * @return void
      */
-    public function __construct(protected string $filename)
+    public function __construct(protected String $filename)
     {
         //
     }
@@ -33,7 +33,7 @@ class ExportEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('teste@teste.com', 'Abilio'),
+            //from: new Address('teste@teste.com', 'Abilio'),
             subject: 'Export Email',
         );
     }

@@ -19,7 +19,7 @@ class SendExportEmailJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(protected string $filename)
+    public function __construct(protected String $filename)
     {
         //
     }
@@ -31,7 +31,7 @@ class SendExportEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to("abilio@dozeroaodeploy.com")
+        Mail::to('abilio@dozeroaodeploy.com')
             ->send(new ExportEmail($this->filename));
     }
 }
