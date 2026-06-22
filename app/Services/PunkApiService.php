@@ -10,7 +10,9 @@ class PunkApiService
         ?string $beer_name = null,
         ?string $food = null,
         ?string $malt = null,
-        ?int $ibu_gt = null
+        ?int $ibu_gt = null,
+        ?int $page = 1,
+        ?int $per_page = 30
     )
     {
         $params = array_filter(get_defined_vars());

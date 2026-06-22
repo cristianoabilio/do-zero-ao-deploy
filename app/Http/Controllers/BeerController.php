@@ -28,7 +28,7 @@ class BeerController extends Controller
 
     public function export(BeerRequest $request, PunkApiService $service)
     {
-        $filename = "cervejas-encontradas-" . now()->format('Y-m-d - H_i') . ".xlsx";
+        $filename = "cervejas-encontradas-" . now()->format('Y-m-d - His') . ".xlsx";
 
         ExportJob::withChain([
             new SendExportEmailJob($filename),

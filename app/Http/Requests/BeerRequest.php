@@ -27,7 +27,9 @@ class BeerRequest extends FormRequest
             'beer_name' => 'nullable|string',
             'malt' => 'nullable|string',
             'food' => 'nullable|string',
-            'ibu_gt' => 'nullable|integer'
+            'ibu_gt' => 'nullable|integer',
+            'page' => 'nullable|integer',
+            'per_page' => 'nullable|integer'
         ];
     }
 }
