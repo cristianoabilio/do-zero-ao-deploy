@@ -37,9 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::group(['prefix' => 'beers'], function() {
-        Route::get('/', [BeerController::class, 'index']);
-        Route::get('/export', [BeerController::class, 'export']);
-        Route::resource('/reports', ReportController::class)->only(['index', 'destroy']);
+        Route::get('/', [BeerController::class, 'index'])->name('beers');
+        Route::post('/export', [BeerController::class, 'export'])->name('beers.export');
+        Route::resource('/reports', ReportController::class)->only(['index', 'show', 'destroy']);
     });
 });
 

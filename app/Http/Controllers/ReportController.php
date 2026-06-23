@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Export;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class ReportController extends Controller
 {
@@ -14,18 +15,29 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Export::paginate(12);
+        $reports = Export::paginate();
+
+        return Inertia::render('Reports', [
+            'exports' => $reports
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Export $export)
+    public function show($export) {
+        $export = Export::find($export);
+
+        return Storage::download($export->file_name);
+    }
+
+    public function destroy($export)
     {
-        Storage::delete($export->file_name);
-        $export->delete();
+        $export = Export::find($export);
+
+        if ($export) {
+            Storage::delete($export->file_name);
+            $export->delete();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Seu arquivo foi enviado para processamento e em breve estará em seu email');
     }
 }

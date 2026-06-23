@@ -8,6 +8,7 @@ use App\Jobs\SendExportEmailJob;
 use App\Jobs\StoreExportDataJob;
 use App\Models\Meal;
 use App\Services\PunkApiService;
+use Inertia\Inertia;
 
 class BeerController extends Controller
 {
@@ -17,13 +18,11 @@ class BeerController extends Controller
         $beers = $service->getBeers(...$filters);
         $meals = Meal::all();
 
-
-        dd($meals);
-        // return Inertia::render('Beers', [
-        //     'beers' => $beers,
-        //     'meals' => $meals,
-        //     'filters' => $filters
-        // ]);
+        return Inertia::render('Beers', [
+            'beers' => $beers,
+            'meals' => $meals,
+            'filters' => $filters
+        ]);
     }
 
     public function export(BeerRequest $request, PunkApiService $service)
